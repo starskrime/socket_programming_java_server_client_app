@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 
 public class DateServer {
 
+    public static String[] names={"Ahmed","Murad","Nijat","Omer"};
+    public static String[] adjs={"the gentle","the un-gentle","the braveheart","the urbane"};
     public static final int PORT = 9090;
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(PORT);
@@ -19,11 +21,18 @@ public class DateServer {
 
         //Print current time
         String currentDateTime = LocalDateTime.now().toString();
-        out.println("Current Time is:" + currentDateTime);
+        out.println(getRandomName());
         client.close();
         System.out.println("(SERVER) Sent date (" + currentDateTime + ") and closed the socket.");
         serverSocket.close();
         //reopen
         main(new String[0]);
     }
+
+    public static String getRandomName(){
+        String name = names[(int) (Math.random()*names.length)];
+        String adj = adjs[(int)(Math.random()*adjs.length)];
+        return name + " " + adj;
+    }
+
 }
